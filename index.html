@@ -11,22 +11,36 @@
     <header>
       <h2 class="header__subtitle">Ingredientes</h2>
       <h1 class="header__title">Nombre del plato</h1>
-      <button class="header__btn select">Seleccionar todo</button>
-      <button class="header__btn deselect">Deseleccionar todo</button>
+      <div class="header__btns-wrapper">
+        <button class="header__btn select">Seleccionar todo</button>
+        <button class="header__btn deselect">Deseleccionar todo</button>
+      </div>
     </header>
     <main>
       <section class="articles">
-          <div class="articles__list"></div>
+        <div class="articles__list"></div>
       </section>
       <section class="buy">
-            <p class="buy__items">Items:</p>
-            <p class="buy__subtotal">Subtotal</p>
-            <p class="buy__shipping">Gastos de envío</p>
-            <p class="buy__total">Total</p>
-            <button class="buy-btn">Comprar ingredientes</button>
+        <section class="buy__items">
+          <h3 class="buy__items-title">Items:</h3>
+          <p class="buy__items-quantity"/>
+        </section>
+        <section class="buy__subtotal">
+          <h3 class="buy__subtotal-title">Subtotal</h3>
+          <p class="buy__subtotal-quantity"/>
+        </section>
+        <section class="buy__shipping">
+          <h3 class="buy__shipping-title">Gastos de envío</h3>
+          <p class="buy__shipping-quantity"/>
+        </section>
+        <section class="buy__total">
+          <h3 class="buy__total-title">Total</h3>
+          <p class="buy__total-quantity"/>
+        </section>
+          <button class="buy-btn">Comprar ingredientes</button>
       </section>
     </main>
 
-    <script src="index.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
