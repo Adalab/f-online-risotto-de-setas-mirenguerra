@@ -14,36 +14,37 @@
     <title>Risotto de setas</title>
   </head>
   <body>
-    <header>
-      <h2 class="header__subtitle">Ingredientes</h2>
-      <h1 class="header__title">Nombre del plato</h1>
-      <div class="header__btns-wrapper">
-        <button class="header__btn select">Seleccionar todo</button>
-        <button class="header__btn unselect">Deseleccionar todo</button>
+    <header class="p-0">
+      <h2 class="header__subtitle m-0 text-uppercase text-secondary">Ingredientes</h2>
+      <h1 class="header__title font-weight-bold">Nombre del plato</h1>
+      <div class="header__btns-wrapper row m-0 mt-3">
+        <button class="header__btn select btn btn-link p-0">Seleccionar todo</button>
+        <span class="pl-1 pr-1">|</span>
+        <button class="header__btn unselect btn btn-link p-0">Deseleccionar todo</button>
       </div>
     </header>
     <main>
       <section class="articles">
-        <div class="articles__list"></div>
+        <ul class="articles__list list-group list-ingredients p-0"></ul>
       </section>
       <section class="buy">
         <section class="buy__items row d-flex justify-content-between">
-          <h3 class="buy__items-title">Items:</h3>
-          <p class="buy__items-quantity"/>
+          <h3 class="buy__items-title small text-secondary">Items:</h3>
+          <p class="buy__items-quantity small font-weight-bold pl-2"/>
         </section>
         <section class="buy__subtotal row d-flex justify-content-between">
-          <h3 class="buy__subtotal-title">Subtotal</h3>
+          <h3 class="buy__subtotal-title text-secondary">Subtotal</h3>
           <p class="buy__subtotal-quantity"/>
         </section>
         <section class="buy__shipping row d-flex justify-content-between">
-          <h3 class="buy__shipping-title">Gastos de envío</h3>
+          <h3 class="buy__shipping-title text-secondary">Gastos de envío</h3>
           <p class="buy__shipping-quantity"/>
         </section>
         <section class="buy__total row d-flex justify-content-between">
-          <h3 class="buy__total-title">Total</h3>
-          <p class="buy__total-quantity"/>
+          <h3 class="buy__total-title font-weight-bold h4">Total</h3>
+          <p class="buy__total-quantity text-success font-weight-bold h3"/>
         </section>
-          <button class="buy-btn">Comprar ingredientes</button>
+          <button class="buy-btn btn btn-success btn-lg btn-block d-flex justify-content-center align-items-center mt-4">Comprar ingredientes</button>
       </section>
     </main>
 
