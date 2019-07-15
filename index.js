@@ -18,9 +18,9 @@ let shippingCost = null;
 let subtotal = 0;
 let total = 0;
 let selectedItems = [];
-let checkboxList = 0;
 let itemsList = [];
 let itemsPriceList = [];
+let checkboxList = [];
 
 function getRecipe() {
   fetch(recipeURL)
@@ -49,13 +49,7 @@ function handleInputCheckbox(event) {
   const id = event.target.id;
 
   ingredients[id].checked = checked;
-  if (checked) {
-    ingredients[id].items = 1;
-    itemsList[id].value = ingredients[id].items;
-  } else {
-    ingredients[id].items = 0;
-    itemsList[id].value = ingredients[id].items;
-  }
+  itemsList[id].value = ingredients[id].items;
 
   calculateValue();
 }
@@ -77,23 +71,24 @@ function calculateValue() {
   total = 0;
   for (let i = 0; i < ingredients.length; i++) {
     const actualIngredient = ingredients[i];
-    const totalItems = actualIngredient.checked ? parseInt(actualIngredient.items) : 0;
-    selectedItems += totalItems;
-    const itemPrice = actualIngredient.checked ? actualIngredient.price * totalItems : 0;
+    const totalItems = parseInt(actualIngredient.items);
+    selectedItems += actualIngredient.checked ? totalItems : 0;
+    const itemPrice = actualIngredient.price * totalItems;
     itemsPriceList[i].innerHTML = Math.round(itemPrice * 100) / 100 + " €";
-    subtotal += itemPrice;
+    subtotal += actualIngredient.checked ? itemPrice : 0;
   }
+
   if (selectedItems === 0) {
-    shippingCost = 0;
+    total = subtotal;
   } else {
-    shippingCost = shippingCost;
+    total = subtotal + shippingCost;
   }
-  total = subtotal + shippingCost;
   totalItemsEl.innerHTML = selectedItems;
   subtotalEl.innerHTML = Math.round(subtotal * 100) / 100 + " €";
   shippingPriceEl.innerHTML = shippingCost + " €";
   totalEl.innerHTML = Math.round(total * 100) / 100 + " €";
-  btnTotal.innerHTML = 'El precio total de tu compre es: ' + Math.round(total * 100) / 100 + " €";
+  btnTotal.innerHTML =
+    "El precio total de tu compre es: " + Math.round(total * 100) / 100 + " €";
 }
 
 function printRecipe(recipe) {
@@ -128,7 +123,7 @@ function printRecipe(recipe) {
     const newItemQuantityEl = document.createElement("input");
     newItemQuantityEl.type = "number";
     newItemQuantityEl.name = "itemsQuantity";
-    newItemQuantityEl.value = 0;
+    newItemQuantityEl.value = ingredient.items;
     newItemQuantityEl.min = 0;
     newItemQuantityEl.id = index;
     newItemQuantityEl.classList.add(
@@ -183,8 +178,28 @@ function printRecipe(recipe) {
 
     articlesList.appendChild(newItemEl);
 
-    checkboxList = document.querySelectorAll(".articles__item-checkbox");
     itemsList = document.querySelectorAll(".articles__item-number");
     itemsPriceList = document.querySelectorAll(".articles__item-price");
+    checkboxList = document.querySelectorAll(".articles__item-checkbox");
   });
+
+  function addAllItems() {
+    for (let i = 0; i < ingredients.length; i++) {
+      checkboxList[i].checked = true;
+      ingredients[i].checked = true;
+    }
+    calculateValue();
+  }
+
+  function removeAllItems() {
+    for (let i = 0; i < ingredients.length; i++) {
+      checkboxList[i].checked = false;
+      ingredients[i].checked = false;
+    }
+
+    calculateValue();
+  }
+
+  btnAllSelected.addEventListener("click", addAllItems);
+  btnAllUnselected.addEventListener("click", removeAllItems);
 }
